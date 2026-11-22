@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <rect width="64" height="64" rx="12" fill="#0B0E12"/>
+  <text x="32" y="44" font-family="'Nanum Gothic', 'Malgun Gothic', 'Apple SD Gothic Neo', sans-serif" font-size="38" font-weight="700" text-anchor="middle" fill="#ECE7DF">박</text>
+  <rect x="14" y="52" width="36" height="3" fill="#C68D5D"/>
+</svg>

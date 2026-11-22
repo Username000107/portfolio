@@ -13,11 +13,12 @@ body { font-family: var(--font-family-body); }
 
 /* 왼쪽 글 열: 면 없이 글자와 선만 둡니다. */
 .astryx-layout-content { background: none; }
-/* 사이트 이름은 왼쪽 위에, 작업 목록(22px)보다 크게 둡니다. */
-.who { margin: 0; --text-large-size: 30px; --text-large-leading: 1.3; }
+/* 왼쪽 위: 작은 Level Design Portfolio 아래에 이름을 작업 목록(22px)보다 크게 둡니다. */
+.who { margin: 0; --text-large-size: 26px; --text-large-leading: 1.3; }
 .who .astryx-side-nav-heading { height: auto; min-height: 44px; padding: 0; }
-.who .astryx-side-nav-heading, .who .astryx-side-nav-heading * { font-size: 30px; line-height: 1.3; letter-spacing: -0.01em; font-weight: 400; color: var(--color-text-primary); }
-.who span { overflow: visible; white-space: normal; }
+.who .astryx-side-nav-heading, .who .astryx-side-nav-heading * { font-size: 26px; line-height: 1.3; letter-spacing: -0.01em; font-weight: 400; color: var(--color-text-primary); }
+.who span { display: block; overflow: visible; white-space: pre-line; }
+.who .astryx-side-nav-heading span::first-line { font-size: 15px; line-height: 1.6; letter-spacing: 0; color: var(--color-text-secondary); }
 .side .astryx-side-nav-item { position: relative; padding: 0; border-radius: 0; color: var(--color-text-secondary); background: transparent !important; }
 .side .astryx-side-nav-item.playing, .side .astryx-side-nav-item[aria-current] { color: var(--color-text-primary); }
 .side .astryx-side-nav-item:hover { color: #E6BD8B; }
@@ -44,9 +45,19 @@ body { font-family: var(--font-family-body); }
 .panel .pts { margin-left: -4px; }
 .links { display: flex; flex-wrap: wrap; gap: 0 24px; margin-top: -4px; }
 .lk { padding-block: 12px; }
+/* 레벨 기획서 버튼: 강조색(붉은색)은 이 버튼에만 씁니다. */
+.cta { display: flex; padding-block: 4px 8px; }
+#root .docbtn { font-weight: 700; text-decoration: none; }
+#root .docbtn:hover { text-decoration: underline; text-underline-offset: 4px; }
 .stack > * + * { margin-top: 8px; }
 .mail .astryx-link { padding-block: 8px; overflow-wrap: anywhere; }
 
+
+/* 소개: 넓은 화면에서는 이미지 자리에, 좁은 화면에서는 목록 아래에 나옵니다. */
+.info { row-gap: 16px; }
+.info h2 { text-wrap: balance; }
+.info .stack > * + * { margin-top: 12px; }
+.info-area .info { max-width: 34em; margin: 0; padding: 0; row-gap: 20px; }
 
 /* 훅 이미지와 플레이 영상 */
 .stage { position: relative; overflow: hidden; background: #0B0E12; container-type: size; }
@@ -60,32 +71,30 @@ body { font-family: var(--font-family-body); }
 iframe.art { border: 0; }
 .tag { position: absolute; left: 16px; top: 16px; }
 
-/* 자세히 보기: 작업을 열면 영상 아래에 이어지는 설명입니다. 칸 나눔은 화면이 아니라 이 글 영역의 폭을 따릅니다. */
-.doc { box-sizing: border-box; display: grid; grid-template-columns: minmax(0, 1fr); row-gap: 64px; max-width: 1080px; container: doc / inline-size; scroll-margin-top: 24px; }
+/* 작업 상세: 작업을 열면 영상 아래에 이어지는 설명입니다. 칸 나눔은 화면이 아니라 이 글 영역의 폭을 따릅니다. */
+.doc { box-sizing: border-box; display: grid; grid-template-columns: minmax(0, 1fr); row-gap: 64px; container: doc / inline-size; scroll-margin-top: 40px; }
 .doc-head { display: grid; grid-template-columns: minmax(0, 1fr); row-gap: 24px; }
 .doc-title { display: grid; row-gap: 12px; }
-#root .doc-title h2:focus-visible { outline: 3px solid #ECE7DF; outline-offset: 3px; }
 .lead { max-width: 28em; }
 .frame { overflow: hidden; background: #151A20; }
 .frame img, .frame video, .frame iframe { display: block; width: 100%; height: 100%; border: 0; object-fit: cover; }
-.slot { display: grid; place-items: center; width: 100%; height: 100%; font-size: 14px; line-height: 1.5; color: var(--color-text-secondary); }
 .split { display: grid; grid-template-columns: 200px minmax(0, 1fr); column-gap: 32px; }
 .prose { max-width: 40em; }
 .prose > * + * { margin-top: 8px; }
 .block { display: grid; grid-template-columns: minmax(0, 1fr); row-gap: 24px; }
-.beats-narrow { display: none; }
-.beats .major dt { font-weight: 600; color: var(--color-text-primary); }
 .trio, .duo { display: grid; gap: 16px; }
 .trio { grid-template-columns: repeat(3, minmax(0, 1fr)); }
 .duo { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 .figure { margin: 0; }
 .figure figcaption { margin-top: 8px; }
-.topview { position: relative; aspect-ratio: 16 / 9; }
-.topview img { height: 100%; }
-.topview svg { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
-.topview polyline { fill: none; stroke: #C68D5D; stroke-width: 2; vector-effect: non-scaling-stroke; }
-.beat-mark { position: absolute; transform: translate(-50%, -50%); padding: 0 8px; font-size: 14px; line-height: 1.5; color: #ECE7DF; background: #1E242C; border: 1px solid #C68D5D; border-radius: 8px; }
-.era { display: grid; row-gap: 4px; align-content: start; }
+/* 기획 의도와 컨셉: 한 문장, 스크린샷 세 장, 장마다 제목과 글 */
+.say { max-width: 26em; text-wrap: balance; }
+.shot { display: grid; row-gap: 12px; align-content: start; margin: 0; }
+.shot figcaption { display: grid; row-gap: 4px; }
+.flow { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 16px; }
+.flow ol { display: flex; flex-wrap: wrap; gap: 4px 0; margin: 0; padding: 0; list-style: none; }
+.flow li + li::before { content: "→" / ""; margin-inline: 12px; color: #C68D5D; }
+.note { display: grid; row-gap: 4px; align-content: start; padding-top: 12px; border-top: 1px solid var(--color-border-emphasized); }
 .doc-foot { display: grid; row-gap: 12px; }
 .doc-links { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 0 24px; }
 .doc-links .astryx-link { padding-block: 12px; }
@@ -99,7 +108,8 @@ iframe.art { border: 0; }
   .root { height: auto; min-height: max(100vh, 600px); }
   .astryx-app-shell-sidenav { position: sticky; top: 0; align-self: flex-start; flex: 0 0 400px; width: 400px; height: 100vh; overflow: hidden; }
   .astryx-layout-content { display: flex; flex-direction: column; min-height: max(100vh, 600px); overflow: visible; }
-  .column { box-sizing: border-box; display: flex; flex-direction: column; height: 100%; padding: 24px 32px 16px; overflow-y: auto; scrollbar-width: thin; }
+  /* 위 여백은 이미지와 같은 값(--media-top)에서 글자 위 빈 공간만큼 뺍니다. 이름 첫 줄과 이미지의 윗선이 맞습니다. */
+  .column { box-sizing: border-box; display: flex; flex-direction: column; height: 100%; padding: calc(var(--media-top) - var(--name-lift)) 32px var(--media-top); overflow-y: auto; scrollbar-width: thin; }
   .side { flex: 1 0 auto; width: 100%; height: auto; }
   .side > :has(.who) { padding-block: 0 32px; }
   .side > :has(.astryx-side-nav-section) { padding-block: 0; overflow: visible; }
@@ -107,34 +117,39 @@ iframe.art { border: 0; }
   .panel, .reach { margin-inline: 8px; }
   .panel { padding-bottom: 8px; }
   .reach { padding-top: 4px; }
-  /* 영상 크기는 이 세 값으로 정합니다. 폭은 오른쪽 영역의 86%까지, 높이는 화면의 68%까지입니다. */
-  .page-home { --media-top: 24px; --media-w: min(86%, calc(max(100vh, 600px) * 0.68 * 16 / 9)); }
-  .stage { flex: none; z-index: 1; width: var(--media-w); max-height: max(100vh, 600px); margin-top: var(--media-top); aspect-ratio: 16 / 9; }
-  .doc { width: var(--media-w); margin-top: 56px; padding-bottom: 72px; }
+  /* 영상 크기는 이 세 값으로 정합니다. 폭은 오른쪽 영역의 90%까지, 높이는 화면의 72%까지입니다. */
+  .page-home { --name-lift: 6px; --media-top: 40px; --media-left: 32px; --media-w: min(90%, calc(max(100vh, 600px) * 0.72 * 16 / 9)); }
+  .stage { flex: none; z-index: 1; width: var(--media-w); max-height: max(100vh, 600px); margin-top: var(--media-top); margin-left: var(--media-left); aspect-ratio: 16 / 9; }
+  .doc { width: var(--media-w); margin-top: 56px; margin-left: var(--media-left); padding-bottom: 72px; }
+  .info-area { margin: var(--media-top) 0 0 var(--media-left); }
+  .info-area h2 { margin-top: -6px; }
 }
 
 /* 세로가 낮은 창에서는 간격을 줄여 한 화면에 담습니다. */
 @media (min-width: 1024px) and (min-aspect-ratio: 3 / 2) and (max-height: 760px) {
-  .page-home { --media-top: 12px; }
+  .page-home { --media-top: 24px; --media-left: 24px; }
   .doc { margin-top: 40px; }
-  .column { padding-block: 12px 4px; }
   .side > :has(.who) { padding-bottom: 8px; }
   .side .cue { height: 44px; }
   .astryx-side-nav-section + .astryx-side-nav-section { margin-top: 4px; }
   .panel { row-gap: 8px; padding-bottom: 0; }
   .links { margin-top: 0; }
   .lk { padding-block: 8px; }
+  .cta { padding-block: 2px 4px; }
   .reach { padding-top: 0; }
 }
 
 /* 세로 660px 이하에서는 줄 높이(44px)는 그대로 두고 사이 간격만 더 줄입니다. 작업 4개와 설명이 함께 들어가게 합니다. */
 @media (min-width: 1024px) and (min-aspect-ratio: 3 / 2) and (max-height: 660px) {
-  .page-home { --media-top: 8px; }
-  .column { padding-block: 8px 0; }
+  .page-home { --media-top: 16px; --media-left: 16px; }
+  .column { padding-bottom: 8px; }
   .side > :has(.who) { padding-bottom: 0; }
   .side .astryx-side-nav-section { padding-block: 0; }
   .astryx-side-nav-section + .astryx-side-nav-section { margin-top: 0; }
   .panel { row-gap: 4px; }
+  /* 두 줄짜리 이름이 늘린 높이만큼 줄여, 작업 4개와 설명이 그대로 한 화면에 들어가게 합니다. */
+  .who .astryx-side-nav-heading, .who .astryx-side-nav-heading * { font-size: 22px; line-height: 1.1; }
+  .lk { padding-block: 6px; }
 }
 
 /* 그 밖의 화면: 첫 화면은 이미지, 이름, 목록, 연락처 순서로, 작업을 열면 영상, 이름, 목록, 설명, 자세한 내용 순서로 쌓습니다. */
@@ -151,9 +166,9 @@ iframe.art { border: 0; }
   .reach { order: 4; padding: 8px 16px; }
   .stage { aspect-ratio: 16 / 9; }
   /* 첫 화면의 훅 이미지와 작업 영상 모두 폭을 줄여 오른쪽을 비웁니다. */
-  .page-home .stage { flex: none; align-self: flex-start; width: min(86%, calc(68vh * 16 / 9)); margin: 16px 0 0 16px; }
+  .page-home .stage { flex: none; align-self: flex-start; width: min(90%, calc(72vh * 16 / 9)); margin: 24px 0 0 24px; }
   .astryx-side-nav-section + .astryx-side-nav-section { margin-top: 8px; }
-  .who .astryx-side-nav-heading, .who .astryx-side-nav-heading * { font-size: clamp(24px, 6.5vw, 30px); }
+  .who .astryx-side-nav-heading, .who .astryx-side-nav-heading * { font-size: clamp(22px, 6.5vw, 26px); }
 }
 
 /* 소개와 연락을 한 줄에 둡니다. */
@@ -162,7 +177,7 @@ iframe.art { border: 0; }
   .astryx-side-nav-section + .astryx-side-nav-section > :last-child > *, .astryx-side-nav-section + .astryx-side-nav-section .astryx-side-nav-item { width: auto; }
 }
 
-/* 자세히 보기의 칸 나눔: 글 영역이 좁아지면 차례로 한 줄로 바꿉니다. */
+/* 작업 상세의 칸 나눔: 글 영역이 좁아지면 차례로 한 줄로 바꿉니다. */
 @container doc (max-width: 899px) {
   .split { grid-template-columns: 136px minmax(0, 1fr); column-gap: 24px; }
 }
@@ -171,10 +186,12 @@ iframe.art { border: 0; }
   .split { grid-template-columns: minmax(0, 1fr); row-gap: 16px; }
 }
 
+@container doc (max-width: 719px) {
+  .trio { grid-template-columns: minmax(0, 1fr); row-gap: 24px; }
+}
+
 @container doc (max-width: 499px) {
-  .trio, .duo { grid-template-columns: minmax(0, 1fr); }
-  .beats-wide { display: none; }
-  .beats-narrow { display: flex; }
+  .duo { grid-template-columns: minmax(0, 1fr); }
 }
 
 @media (max-width: 1180px) {
@@ -185,7 +202,7 @@ iframe.art { border: 0; }
 @keyframes appear { from { opacity: 0; } }
 
 @media (prefers-reduced-motion: no-preference) {
-  .picked .who, .picked .panel, .picked .reach, .picked .doc { animation: appear .3s .2s backwards; }
+  .picked .panel, .picked .doc { animation: appear .3s .2s backwards; }
 }
 
 @media (min-width: 1024px) and (min-aspect-ratio: 3 / 2) and (prefers-reduced-motion: no-preference) {

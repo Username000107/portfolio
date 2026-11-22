@@ -1,3 +1,4 @@
+import { Button } from '@astryxdesign/core/Button';
 import { Link } from '@astryxdesign/core/Link';
 
 const root = document.documentElement.dataset.root ?? './';
@@ -18,4 +19,9 @@ export function SiteLink({ to, children, ...props }) {
       {children}
     </Link>
   );
+}
+
+// 레벨 기획서 PDF를 새 탭으로 여는 버튼입니다. 강조색은 이 버튼에만 씁니다.
+export function DocButton({ to, label = '레벨 기획서 보기 (PDF)' }) {
+  return <Button className="docbtn" label={label} variant="primary" size="lg" href={siteUrl(to)} target="_blank" rel="noopener noreferrer" />;
 }

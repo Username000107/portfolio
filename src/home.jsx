@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useState } from 'react';
 import { Badge } from '@astryxdesign/core/Badge';
+import { Heading } from '@astryxdesign/core/Heading';
 import { List, ListItem } from '@astryxdesign/core/List';
 import { Text } from '@astryxdesign/core/Text';
 import { VisuallyHidden } from '@astryxdesign/core/VisuallyHidden';
@@ -8,11 +9,11 @@ import { mount } from './app.jsx';
 import { about, details, profile, works } from './content.js';
 import { WorkDetail } from './detail.jsx';
 import { HookBar, HookImages, Still, useHookImages } from './hook-images.jsx';
-import { SiteLink, siteUrl } from './links.jsx';
+import { DocButton, SiteLink, siteUrl } from './links.jsx';
 import { SiteShell } from './shell.jsx';
 import { YouTube } from './youtube.jsx';
 
-const views = [...works.map((work) => work.id), 'about', 'contact'];
+const views = [...works.map((work) => work.id), 'about'];
 const workById = (id) => works.find((work) => work.id === id);
 
 const currentHash = () => window.location.hash.slice(1);
@@ -56,7 +57,7 @@ function Player({ work, reduced }) {
   let media = (
     <>
       <Still work={work} eager alt={`${work.nav} 대표 스크린샷`} />
-      <Badge className="tag" label="플레이 영상 자리" />
+      {!poster && <Badge className="tag" label="플레이 영상 자리" />}
     </>
   );
   if (work.youtubeId) {
@@ -73,50 +74,52 @@ function Player({ work, reduced }) {
   );
 }
 
-function WorkPanel({ work, onMore }) {
+// 상세가 있는 작업은 같은 내용이 영상 아래에 더 자세히 나오므로, 여기에는 메타 한 줄과 레벨 기획서 버튼만 둡니다.
+function WorkPanel({ work }) {
+  const brief = Boolean(details[work.id]);
   return (
     <section id={`v-${work.id}`} className="panel work">
       <VisuallyHidden as="h2">{work.title} 소개</VisuallyHidden>
       <Text as="p" type="supporting" color="secondary" display="block" className="meta">
         {work.meta}
       </Text>
-      <Text as="p" display="block">
-        {work.body[0]}
-      </Text>
-      {work.points ? (
-        <List className="pts" listStyle="disc" density="compact" edge="flush">
-          {work.points.map((point) => (
-            <ListItem key={point} label={point} />
-          ))}
-        </List>
-      ) : (
+      {!brief && (
         <Text as="p" display="block">
-          {work.body[1]}
+          {work.body[0]}
         </Text>
       )}
-      <p className="links">
-        {details[work.id] ? (
-          <SiteLink to={`#${work.id}`} className="lk more" onClick={onMore}>
-            자세히 보기
-          </SiteLink>
-        ) : work.link ? (
+      {!brief &&
+        (work.points ? (
+          <List className="pts" listStyle="disc" density="compact" edge="flush">
+            {work.points.map((point) => (
+              <ListItem key={point} label={point} />
+            ))}
+          </List>
+        ) : (
+          <Text as="p" display="block">
+            {work.body[1]}
+          </Text>
+        ))}
+      {work.doc && (
+        <div className="cta">
+          <DocButton to={work.doc} />
+        </div>
+      )}
+      {work.link && (
+        <p className="links">
           <SiteLink to={work.link.to} className="lk">
             {work.link.label}
           </SiteLink>
-        ) : (
-          <Text color="secondary" className="lk">
-            {work.note}
-          </Text>
-        )}
-      </p>
+        </p>
+      )}
     </section>
   );
 }
 
 function AboutPanel() {
   return (
-    <section id="v-about" className="panel">
-      <VisuallyHidden as="h2">소개</VisuallyHidden>
+    <section id="v-about" className="panel info">
+      <Heading level={2}>{about.title}</Heading>
       <div className="stack">
         {about.story.map((paragraph) => (
           <Text key={paragraph} as="p" display="block">
@@ -124,41 +127,18 @@ function AboutPanel() {
           </Text>
         ))}
       </div>
-      <Text as="p" display="block">
-        {about.tools}
-      </Text>
+      {profile.pr && (
+        <div className="cta">
+          <DocButton to={profile.pr} label="PR 문서 보기 (PDF)" />
+        </div>
+      )}
     </section>
   );
 }
 
-function ContactPanel() {
-  return (
-    <section id="v-contact" className="panel">
-      <VisuallyHidden as="h2">연락</VisuallyHidden>
-      <p className="mail">
-        <SiteLink to={profile.email ? `mailto:${profile.email}` : null} type="large" weight="normal">
-          {profile.email ?? '[이메일]'}
-        </SiteLink>
-      </p>
-      <p className="links">
-        <SiteLink to={profile.resume} className="lk">
-          이력서 PDF
-        </SiteLink>
-        <SiteLink to={profile.itch} className="lk">
-          itch.io
-        </SiteLink>
-        <SiteLink to={profile.artstation} className="lk">
-          ArtStation
-        </SiteLink>
-      </p>
-    </section>
-  );
-}
-
-function Detail({ view, openWork, onMore }) {
+function Detail({ view, openWork }) {
   if (view === 'about') return <AboutPanel />;
-  if (view === 'contact') return <ContactPanel />;
-  return openWork ? <WorkPanel work={openWork} onMore={onMore} /> : null;
+  return openWork ? <WorkPanel work={openWork} /> : null;
 }
 
 function Home() {
@@ -167,10 +147,11 @@ function Home() {
   const wide = useMediaQuery(WIDE);
   const [restart, setRestart] = useState(0);
   const openWork = workById(view);
-  const { index, clock } = useHookImages({ running: !openWork, restart, reduced });
+  const info = view === 'about';
+  const { index, clock } = useHookImages({ running: view === '', restart, reduced });
 
   useEffect(() => {
-    const label = openWork?.nav ?? { about: '소개', contact: '연락' }[view];
+    const label = openWork?.nav ?? { about: '소개' }[view];
     document.title = label ? `${label} - ${profile.heading}` : profile.heading;
   }, [view, openWork]);
 
@@ -196,30 +177,22 @@ function Home() {
     go(works[clock.pressed()].id);
   };
 
-  // '자세히 보기'는 다른 페이지로 가지 않고, 영상 아래에 이어지는 내용으로 스크롤합니다.
-  const showMore = (event) => {
-    if (!isPlainClick(event)) return;
-    event.preventDefault();
-    document.getElementById('detail')?.scrollIntoView({ behavior: reduced ? 'auto' : 'smooth', block: 'start' });
-    document.getElementById('detail-title')?.focus({ preventScroll: true });
-  };
-
   const page = openWork ? details[openWork.id] : null;
   const more = page ? (
     <WorkDetail key={openWork.id} page={page} next={{ href: `#${page.next.work}`, onClick: follow(page.next.work), label: page.next.label }} />
   ) : null;
-  const panel = <Detail view={view} openWork={openWork} onMore={showMore} />;
+  const panel = <Detail view={view} openWork={openWork} />;
 
   return (
     <SiteShell
-      className={`page-home${view ? ` picked is-${view}` : ''}${more ? ' has-more' : ''}`}
+      className={`page-home${view ? ` picked is-${view}` : ''}`}
       current={view}
       playing={view === '' ? index : -1}
       bar={reduced ? null : <HookBar clock={clock} />}
-      // 좁은 화면에서는 설명 바로 아래에, 넓은 화면에서는 영상 아래에 자세한 내용이 이어집니다.
+      // 좁은 화면에서는 설명 바로 아래에, 넓은 화면에서는 영상 아래에 상세가 이어집니다.
       detail={
         <>
-          {panel}
+          {!(wide && info) && panel}
           {!wide && more}
         </>
       }
@@ -227,7 +200,9 @@ function Home() {
       onName={backToFirst}
       nameAs="h1"
     >
-      <div className="stage">{openWork ? <Player key={openWork.id} work={openWork} reduced={reduced} /> : <HookImages index={index} onPress={pressImage} />}</div>
+      {/* 소개는 이미지 대신 그 내용을 오른쪽에 보여 줍니다. 좁은 화면에서는 목록 아래에 나옵니다. */}
+      {!info && <div className="stage">{openWork ? <Player key={openWork.id} work={openWork} reduced={reduced} /> : <HookImages index={index} onPress={pressImage} />}</div>}
+      {info && wide && <div className="info-area">{panel}</div>}
       {wide && more}
     </SiteShell>
   );

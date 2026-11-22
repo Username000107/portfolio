@@ -31,7 +31,7 @@ export function SiteShell({ className, current = '', playing = -1, bar = null, d
         aria-label="주요 메뉴"
         header={
           <Name className="who">
-            <SideNavHeading heading={profile.heading} headingHref="./" onClick={onName} />
+            <SideNavHeading heading={profile.mark.join('\n')} headingHref="./" onClick={onName} />
           </Name>
         }
       >
@@ -44,14 +44,17 @@ export function SiteShell({ className, current = '', playing = -1, bar = null, d
         </SideNavSection>
         <SideNavSection title="안내" isHeaderHidden>
           {item('about', '소개', 'go go1')}
-          {item('contact', '연락', 'go go2')}
         </SideNavSection>
       </SideNav>
       {detail}
       <div className="reach">
-        <SiteLink to={profile.email ? `mailto:${profile.email}` : null} type="supporting">
-          {profile.email ?? '[이메일]'}
-        </SiteLink>
+        {profile.email ? (
+          <SiteLink to={`mailto:${profile.email}`} type="supporting">
+            {profile.email}
+          </SiteLink>
+        ) : (
+          <span />
+        )}
         <Text as="p" type="supporting" color="secondary" display="block">
           {profile.copyright}
         </Text>
