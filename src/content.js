@@ -8,7 +8,7 @@
 export const profile = {
   heading: '레벨 디자이너 박세준',
   copyright: '© 2026 박세준',
-  email: null, // 예: 'name@example.com'
+  email: 'rabibel4454@naver.com',
   resume: null, // 예: 'assets/resume.pdf'
   itch: null, // 예: 'https://이름.itch.io'
   artstation: null, // 예: 'https://www.artstation.com/이름'
