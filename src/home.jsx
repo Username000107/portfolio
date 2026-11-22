@@ -161,20 +161,6 @@ function Detail({ view, openWork, onMore }) {
   return openWork ? <WorkPanel work={openWork} onMore={onMore} /> : null;
 }
 
-// 첫 화면의 이름과 이메일입니다. 이미지 아래 빈 자리 가운데에 놓입니다.
-function Cover() {
-  return (
-    <div className="cover">
-      <h1 className="cover-name">{profile.heading}</h1>
-      <p className="mail cover-mail">
-        <SiteLink to={profile.email ? `mailto:${profile.email}` : null} type="large" weight="normal">
-          {profile.email ?? '[이메일]'}
-        </SiteLink>
-      </p>
-    </div>
-  );
-}
-
 function Home() {
   const [view, go] = useView();
   const reduced = useMediaQuery('(prefers-reduced-motion: reduce)');
@@ -239,10 +225,9 @@ function Home() {
       }
       follow={follow}
       onName={backToFirst}
-      nameAs={view ? 'h1' : 'p'}
+      nameAs="h1"
     >
       <div className="stage">{openWork ? <Player key={openWork.id} work={openWork} reduced={reduced} /> : <HookImages index={index} onPress={pressImage} />}</div>
-      {view === '' && <Cover />}
       {wide && more}
     </SiteShell>
   );

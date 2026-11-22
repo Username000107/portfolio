@@ -3,8 +3,8 @@
 
 /* 아래 규칙은 층(layer) 밖에 있어서 Astryx 기본 스타일보다 항상 우선합니다. */
 
-html, body { margin: 0; background: #081919; }
-html { color-scheme: dark; scrollbar-color: #4D524B transparent; }
+html, body { margin: 0; background: #0B0E12; }
+html { color-scheme: dark; scrollbar-color: #3B434E transparent; }
 body { font-family: var(--font-family-body); }
 #root { word-break: keep-all; }
 #root p { margin: 0; }
@@ -13,9 +13,10 @@ body { font-family: var(--font-family-body); }
 
 /* 왼쪽 글 열: 면 없이 글자와 선만 둡니다. */
 .astryx-layout-content { background: none; }
-.who { margin: 0; --text-large-size: 17px; --text-large-leading: 1.5; }
+/* 사이트 이름은 왼쪽 위에, 작업 목록(22px)보다 크게 둡니다. */
+.who { margin: 0; --text-large-size: 30px; --text-large-leading: 1.3; }
 .who .astryx-side-nav-heading { height: auto; min-height: 44px; padding: 0; }
-.who .astryx-side-nav-heading, .who .astryx-side-nav-heading * { font-weight: 400; }
+.who .astryx-side-nav-heading, .who .astryx-side-nav-heading * { font-size: 30px; line-height: 1.3; letter-spacing: -0.01em; font-weight: 400; color: var(--color-text-primary); }
 .who span { overflow: visible; white-space: normal; }
 .side .astryx-side-nav-item { position: relative; padding: 0; border-radius: 0; color: var(--color-text-secondary); background: transparent !important; }
 .side .astryx-side-nav-item.playing, .side .astryx-side-nav-item[aria-current] { color: var(--color-text-primary); }
@@ -46,20 +47,15 @@ body { font-family: var(--font-family-body); }
 .stack > * + * { margin-top: 8px; }
 .mail .astryx-link { padding-block: 8px; overflow-wrap: anywhere; }
 
-/* 첫 화면의 이름과 이메일 */
-.cover { display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; }
-.cover-name { margin: 0; font-size: 40px; font-weight: 400; line-height: 1.3; letter-spacing: -0.01em; color: var(--color-text-primary); }
-#root .cover-mail { margin-top: 4px; }
-.page-home:not(.picked) .reach { display: none; }
 
 /* 훅 이미지와 플레이 영상 */
-.stage { position: relative; overflow: hidden; background: #081919; container-type: size; }
+.stage { position: relative; overflow: hidden; background: #0B0E12; container-type: size; }
 .hook { position: absolute; inset: 0; display: block; overflow: hidden; visibility: hidden; opacity: 0; transition: opacity 0s .6s, visibility 0s .6s; }
 .hook.on { z-index: 1; visibility: visible; opacity: 1; transition: opacity .6s; }
 .player { position: absolute; inset: 0; }
 .art { position: absolute; inset: 0; display: block; width: 100%; height: 100%; object-fit: cover; }
 .art svg { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
-.art-inv { background-color: #2B3D3A; background-image: linear-gradient(#3A4C48 1px, transparent 1px), linear-gradient(90deg, #3A4C48 1px, transparent 1px); background-size: 12px 12px; }
+.art-inv { background-color: #1E242C; background-image: linear-gradient(#2B323B 1px, transparent 1px), linear-gradient(90deg, #2B323B 1px, transparent 1px); background-size: 12px 12px; }
 .art.contain { width: min(100cqw, 100cqh * 16 / 9); height: auto; aspect-ratio: 16 / 9; margin: auto; object-fit: contain; }
 iframe.art { border: 0; }
 .tag { position: absolute; left: 16px; top: 16px; }
@@ -70,7 +66,7 @@ iframe.art { border: 0; }
 .doc-title { display: grid; row-gap: 12px; }
 #root .doc-title h2:focus-visible { outline: 3px solid #ECE7DF; outline-offset: 3px; }
 .lead { max-width: 28em; }
-.frame { overflow: hidden; background: #142826; }
+.frame { overflow: hidden; background: #151A20; }
 .frame img, .frame video, .frame iframe { display: block; width: 100%; height: 100%; border: 0; object-fit: cover; }
 .slot { display: grid; place-items: center; width: 100%; height: 100%; font-size: 14px; line-height: 1.5; color: var(--color-text-secondary); }
 .split { display: grid; grid-template-columns: 200px minmax(0, 1fr); column-gap: 32px; }
@@ -88,17 +84,17 @@ iframe.art { border: 0; }
 .topview img { height: 100%; }
 .topview svg { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
 .topview polyline { fill: none; stroke: #C68D5D; stroke-width: 2; vector-effect: non-scaling-stroke; }
-.beat-mark { position: absolute; transform: translate(-50%, -50%); padding: 0 8px; font-size: 14px; line-height: 1.5; color: #ECE7DF; background: #223330; border: 1px solid #C68D5D; border-radius: 8px; }
+.beat-mark { position: absolute; transform: translate(-50%, -50%); padding: 0 8px; font-size: 14px; line-height: 1.5; color: #ECE7DF; background: #1E242C; border: 1px solid #C68D5D; border-radius: 8px; }
 .era { display: grid; row-gap: 4px; align-content: start; }
 .doc-foot { display: grid; row-gap: 12px; }
 .doc-links { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 0 24px; }
 .doc-links .astryx-link { padding-block: 12px; }
 
 /* 넓은 화면: 왼쪽 글 열은 화면에 붙어 있고, 오른쪽에 훅 이미지나 영상이 놓입니다.
-   작업을 열면 영상이 오른쪽과 아래에 여백을 두고 놓이고, 자세한 내용은 그 아래로 스크롤해서 봅니다. */
+   첫 화면의 이미지와 작업 영상은 같은 크기로 오른쪽과 아래에 여백을 두고 놓이고, 자세한 내용은 그 아래로 스크롤해서 봅니다. */
 @media (min-width: 1024px) and (min-aspect-ratio: 3 / 2) {
   /* 작업마다 스크롤 막대가 생겼다 없어지며 영상 크기가 달라지지 않도록, 항목을 연 화면에서는 막대 자리를 늘 비워 둡니다. */
-  html:has(.page-home.picked) { scrollbar-gutter: stable; }
+  html:has(.page-home) { scrollbar-gutter: stable; }
   #root { min-height: max(100vh, 600px); }
   .root { height: auto; min-height: max(100vh, 600px); }
   .astryx-app-shell-sidenav { position: sticky; top: 0; align-self: flex-start; flex: 0 0 400px; width: 400px; height: 100vh; overflow: hidden; }
@@ -114,10 +110,6 @@ iframe.art { border: 0; }
   /* 영상 크기는 이 세 값으로 정합니다. 폭은 오른쪽 영역의 86%까지, 높이는 화면의 68%까지입니다. */
   .page-home { --media-top: 24px; --media-w: min(86%, calc(max(100vh, 600px) * 0.68 * 16 / 9)); }
   .stage { flex: none; z-index: 1; width: var(--media-w); max-height: max(100vh, 600px); margin-top: var(--media-top); aspect-ratio: 16 / 9; }
-  /* 첫 화면의 훅 이미지는 위와 오른쪽 끝까지 닿고, 아래에 이름이 들어갈 자리를 남깁니다. */
-  .page-home:not(.picked) .stage { width: 100%; max-height: calc(max(100vh, 600px) - 200px); margin-top: 0; }
-  .page-home:not(.picked) .who { visibility: hidden; }
-  .cover { flex: 1 1 auto; }
   .doc { width: var(--media-w); margin-top: 56px; padding-bottom: 72px; }
 }
 
@@ -145,7 +137,7 @@ iframe.art { border: 0; }
   .panel { row-gap: 4px; }
 }
 
-/* 그 밖의 화면: 첫 화면은 이미지, 이름, 목록 순서로, 작업을 열면 영상, 이름, 목록, 설명, 자세한 내용 순서로 쌓습니다. */
+/* 그 밖의 화면: 첫 화면은 이미지, 이름, 목록, 연락처 순서로, 작업을 열면 영상, 이름, 목록, 설명, 자세한 내용 순서로 쌓습니다. */
 @media not all and (min-width: 1024px), not all and (min-aspect-ratio: 3 / 2) {
   .root { height: auto; }
   .root :has(> .astryx-app-shell-sidenav) { flex-direction: column; }
@@ -158,13 +150,10 @@ iframe.art { border: 0; }
   .doc { order: 3; width: auto; max-width: none; margin-top: 40px; padding: 32px 16px 24px; border-top: 1px solid var(--color-border); }
   .reach { order: 4; padding: 8px 16px; }
   .stage { aspect-ratio: 16 / 9; }
-  /* 작업을 연 화면에서는 영상을 줄여 오른쪽을 비웁니다. 첫 화면의 훅 이미지는 가로를 다 씁니다. */
-  .page-home.picked .stage { flex: none; align-self: flex-start; width: min(86%, calc(68vh * 16 / 9)); margin: 16px 0 0 16px; }
+  /* 첫 화면의 훅 이미지와 작업 영상 모두 폭을 줄여 오른쪽을 비웁니다. */
+  .page-home .stage { flex: none; align-self: flex-start; width: min(86%, calc(68vh * 16 / 9)); margin: 16px 0 0 16px; }
   .astryx-side-nav-section + .astryx-side-nav-section { margin-top: 8px; }
-  .page-home:not(.picked) .side > :has(.who) { display: none; }
-  .page-home:not(.picked) .side > :has(.astryx-side-nav-section) { padding-bottom: 24px; }
-  .cover { padding: 32px 16px 16px; }
-  .cover-name { font-size: clamp(28px, 7.5vw, 40px); }
+  .who .astryx-side-nav-heading, .who .astryx-side-nav-heading * { font-size: clamp(24px, 6.5vw, 30px); }
 }
 
 /* 소개와 연락을 한 줄에 둡니다. */
