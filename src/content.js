@@ -63,7 +63,7 @@ export const works = [
     nav: '인벤토리가 부족합니다',
     title: '인벤토리가 부족합니다',
     meta: 'Unity로 만든 5인 팀 프로젝트, 2주',
-    link: { label: 'itch.io에서 플레이', to: null }, // 게임 페이지 주소
+    link: { label: 'itch.io에서 플레이', to: 'https://jinsub706.itch.io/inventory-is-not-enough' },
     body: [
       '백팩 히어로의 가방 관리와 뱀파이어 서바이버의 생존을 합친 게임입니다.',
       '맵 절차적 생성과 방 4종을 맡았고, 생성된 결과를 손으로 다듬어 재미를 맞췄습니다.',
