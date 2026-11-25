@@ -127,6 +127,15 @@ function AboutPanel() {
           </Text>
         ))}
       </div>
+      {(profile.email || profile.phone) && (
+        <div className="contact">
+          <Text type="supporting" color="secondary">
+            연락처
+          </Text>
+          {profile.email && <SiteLink to={`mailto:${profile.email}`}>{profile.email}</SiteLink>}
+          {profile.phone && <SiteLink to={`tel:${profile.phone.replace(/[^0-9+]/g, '')}`}>{profile.phone}</SiteLink>}
+        </div>
+      )}
       {profile.pr && (
         <div className="cta">
           <DocButton to={profile.pr} label="PR 문서 보기 (PDF)" />
@@ -155,9 +164,9 @@ function Home() {
     document.title = label ? `${label} - ${profile.heading}` : profile.heading;
   }, [view, openWork]);
 
-  // 다른 항목을 열면 맨 위에서 시작합니다. 좁은 화면은 목록이 영상 아래에 있어서 그대로 둡니다.
+  // 다른 항목을 열면 맨 위에서 시작합니다. 좁은 화면에서 긴 상세 끝의 '다음 작업'을 눌러도 영상부터 보입니다.
   useEffect(() => {
-    if (window.matchMedia(WIDE).matches) window.scrollTo(0, 0);
+    window.scrollTo(0, 0);
   }, [view]);
 
   const follow = (next) => (event) => {

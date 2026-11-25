@@ -11,11 +11,12 @@ export function siteUrl(path) {
 
 const stay = (event) => event.preventDefault();
 
-// 주소가 아직 없으면 눌러도 이동하지 않는 링크가 됩니다.
+// 주소가 아직 없으면 눌러도 이동하지 않는 링크가 됩니다. 바깥 사이트(http, https)는 새 탭으로 엽니다.
 export function SiteLink({ to, children, ...props }) {
   const href = siteUrl(to);
+  const outside = /^https?:/i.test(href ?? '') ? { target: '_blank', rel: 'noopener noreferrer' } : null;
   return (
-    <Link href={href ?? '#'} hasUnderline color="primary" {...props} onClick={href ? props.onClick : stay}>
+    <Link href={href ?? '#'} hasUnderline color="primary" {...outside} {...props} onClick={href ? props.onClick : stay}>
       {children}
     </Link>
   );

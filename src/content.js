@@ -1,15 +1,17 @@
 // 사이트에 들어가는 글과 자료는 이 파일에서만 고칩니다.
 //
-// [대괄호]   아직 정해지지 않은 내용입니다. 실제 내용으로 바꿉니다.
 // null       아직 없는 주소나 파일입니다. 준비되면 채웁니다.
 // 파일 경로  public 폴더를 기준으로 적습니다.
-//            public/assets/img/ritual-hook.webp 는 'assets/img/ritual-hook.webp' 로 적습니다.
+//            public/assets/img/ritual-hook.jpg 는 'assets/img/ritual-hook.jpg' 로 적습니다.
+// body, points  상세(아래 details)가 없는 작업에만 적습니다. 왼쪽 설명에 나옵니다.
 
 export const profile = {
   heading: '박세준 Level Design Portfolio', // 브라우저 탭 제목
   mark: ['Level Design Portfolio', '박세준'], // 왼쪽 위에 두 줄로 보이는 글자
   copyright: '© 2026 박세준',
   email: 'rabibel4454@naver.com',
+  // 소개 화면의 연락처에만 나옵니다. 비워 두면(null) 나오지 않습니다.
+  phone: null,
   // PR 문서(PDF)입니다. 소개 화면에 링크로 나옵니다. 주소(https://...)를 적어도 됩니다.
   pr: 'assets/docs/pr.pdf',
 };
@@ -23,8 +25,6 @@ export const works = [
     nav: '의식의 밤',
     title: '의식의 밤',
     meta: 'Unreal Engine 5.8, 시간 전환 퍼즐, 약 3주',
-    body: ['절벽 마을을 꼭대기의 위커맨까지 오르며 의식의 밤과 폐허를 오간다.'],
-    points: ['현재에서 한 일이 미래에 남아 길이 된다.', '위커맨은 처음부터 보이는 목표이자 마지막 길이다.'],
     // 홈에 나오는 훅 장면 이미지입니다. 16:9로 준비합니다.
     hook: 'assets/img/ritual-hook.jpg',
     // 레벨 기획서(PDF)입니다. 왼쪽 설명의 버튼으로 새 탭에 열립니다. 주소(https://...)를 적어도 됩니다.
@@ -32,15 +32,13 @@ export const works = [
     // 작업을 열었을 때 나오는 영상입니다. 긴 영상은 youtubeId, 짧은 파일은 video에 적습니다.
     youtubeId: 'R-gQ8o8CT28', // 영상 주소의 v= 뒤나 youtu.be/ 뒤에 있는 값 (LD_RitualNight)
     video: null, // 예: 'assets/video/ritual-night.mp4'
-    poster: null, // 예: 'assets/img/ritual-night.webp'
+    poster: null, // 예: 'assets/img/ritual-night.jpg'
   },
   {
     id: 'chase',
     nav: '코쿤시티',
     title: '코쿤시티',
     meta: 'Unreal Engine 5.8, 액션 어드벤처, 약 3주',
-    body: ['배신당해 버려진 주인공이 소총 한 자루로 복수하러 간다.'],
-    points: ['탄이 모자라, 길을 막는 감염체만 쏘며 도망친다.', '걸어온 길에 남긴 기름 줄이 그대로 도화선이 된다.'],
     hook: 'assets/img/chase-hook.jpg',
     doc: 'assets/docs/cocoon-city.pdf',
     youtubeId: 'HG2KQ-4RPgc', // LD_CocoonCity
@@ -52,8 +50,6 @@ export const works = [
     nav: '화이트아웃',
     title: '화이트아웃',
     meta: 'Unreal Engine 5.8, 서바이벌 호러, 약 2주',
-    body: ["남극 설산을 내려와, '그것'을 피해 얼음에 박힌 쇄빙선으로 탈출한다."],
-    points: ['스노모빌 구간은 막지 않고, 지나치는 사건으로 긴장을 준다.', "'그것'은 싸우기 전에 유리 너머에서 먼저 보여 준다."],
     hook: 'assets/img/whiteout-hook.jpg',
     doc: 'assets/docs/whiteout.pdf',
     youtubeId: 'Id818v2xyIc', // LD_WhiteOut
@@ -81,8 +77,8 @@ export const works = [
 export const about = {
   title: '공간으로 감정을 움직이는 레벨 디자이너',
   story: [
-    '게임은 다른 매체와 달리 플레이어가 직접 겪습니다. 플레이어가 무엇을 겪고 어떻게 느낄지를 가장 가까이에서 다루는 일이 레벨 디자인이라고 생각합니다.',
-    '아우터 와일즈에서 흩어져 있던 단서가 하나로 이어지던 순간이 가장 오래 남았습니다. 그런 발견의 순간을 설계하고 싶습니다.',
+    '게임은 다른 매체보다 체험적 성격이 강합니다. 플레이어가 무엇을 겪고 어떻게 느낄지를 가장 가까이에서 다루는 일이 레벨 디자인이라 생각합니다.',
+    '수많은 게임을 하며 느꼈던 깨달음과 감동, 그리고 기쁨. 그런 순간이 담긴, 사람들에게 곱씹히는 레벨을 만들고 싶습니다.',
   ],
 };
 

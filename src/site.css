@@ -47,7 +47,7 @@ body { font-family: var(--font-family-body); }
 .lk { padding-block: 12px; }
 /* 레벨 기획서 버튼: 강조색(붉은색)은 이 버튼에만 씁니다. */
 .cta { display: flex; padding-block: 4px 8px; }
-#root .docbtn { font-weight: 700; text-decoration: none; }
+#root .docbtn { min-height: 44px; font-weight: 700; text-decoration: none; }
 #root .docbtn:hover { text-decoration: underline; text-underline-offset: 4px; }
 .stack > * + * { margin-top: 8px; }
 .mail .astryx-link { padding-block: 8px; overflow-wrap: anywhere; }
@@ -57,7 +57,10 @@ body { font-family: var(--font-family-body); }
 .info { row-gap: 16px; }
 .info h2 { text-wrap: balance; }
 .info .stack > * + * { margin-top: 12px; }
-.info-area .info { max-width: 34em; margin: 0; padding: 0; row-gap: 20px; }
+/* 소개의 연락처: 작은 이름표 뒤에 메일과 전화가 한 줄로 놓이고, 좁으면 아래로 넘어갑니다. */
+.contact { display: flex; flex-wrap: wrap; align-items: baseline; gap: 0 24px; overflow-wrap: anywhere; }
+.contact .astryx-link { padding-block: 10px; }
+.info-area .info { margin: 0; padding: 0; }
 
 /* 훅 이미지와 플레이 영상 */
 .stage { position: relative; overflow: hidden; background: #0B0E12; container-type: size; }
@@ -65,8 +68,6 @@ body { font-family: var(--font-family-body); }
 .hook.on { z-index: 1; visibility: visible; opacity: 1; transition: opacity .6s; }
 .player { position: absolute; inset: 0; }
 .art { position: absolute; inset: 0; display: block; width: 100%; height: 100%; object-fit: cover; }
-.art svg { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
-.art-inv { background-color: #1E242C; background-image: linear-gradient(#2B323B 1px, transparent 1px), linear-gradient(90deg, #2B323B 1px, transparent 1px); background-size: 12px 12px; }
 .art.contain { width: min(100cqw, 100cqh * 16 / 9); height: auto; aspect-ratio: 16 / 9; margin: auto; object-fit: contain; }
 iframe.art { border: 0; }
 .tag { position: absolute; left: 16px; top: 16px; }
@@ -121,8 +122,12 @@ iframe.art { border: 0; }
   .page-home { --name-lift: 6px; --media-top: 40px; --media-left: 32px; --media-w: min(90%, calc(max(100vh, 600px) * 0.72 * 16 / 9)); }
   .stage { flex: none; z-index: 1; width: var(--media-w); max-height: max(100vh, 600px); margin-top: var(--media-top); margin-left: var(--media-left); aspect-ratio: 16 / 9; }
   .doc { width: var(--media-w); margin-top: 56px; margin-left: var(--media-left); padding-bottom: 72px; }
-  .info-area { margin: var(--media-top) 0 0 var(--media-left); }
-  .info-area h2 { margin-top: -6px; }
+  /* 소개는 글이 짧아서 위에 붙이면 화면이 비어 보입니다. 세로 가운데보다 조금 위에 두고 제목을 크게 씁니다. */
+  .info-area { flex: 1; display: flex; flex-direction: column; justify-content: center; margin: 0 0 0 var(--media-left); padding: var(--media-top) 32px 12vh 0; }
+  .info-area .info { max-width: none; row-gap: 28px; }
+  .info-area h2 { max-width: 14em; font-size: clamp(36px, 3.4vw, 56px); line-height: 1.2; letter-spacing: -0.02em; }
+  .info-area .stack { max-width: 36em; }
+  .info-area .stack p { font-size: 19px; line-height: 1.75; }
 }
 
 /* 세로가 낮은 창에서는 간격을 줄여 한 화면에 담습니다. */

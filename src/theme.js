@@ -33,7 +33,7 @@ export const siteTheme = defineTheme({
     '--text-body-leading': '1.7',
     '--text-label-leading': '1.7',
     '--text-supporting-leading': '1.5',
-    // h1은 사이트 이름이 씁니다. 자세히 보기의 제목은 h2, 그 안의 절은 h3, 작은 제목은 h4입니다.
+    // h1은 사이트 이름이 씁니다. 작업 상세의 제목은 h2, 그 안의 절은 h3, 작은 제목은 h4입니다. 크기는 site.css의 '작업 상세의 제목 크기'가 정합니다.
     '--text-heading-2-size': 'var(--font-size-2xl)',
     '--text-heading-2-weight': 'var(--font-weight-normal)',
     '--text-heading-2-leading': '1.2',

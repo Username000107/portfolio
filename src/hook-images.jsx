@@ -2,7 +2,6 @@ import { useEffect, useMemo, useRef, useState } from 'react';
 import { ProgressBar } from '@astryxdesign/core/ProgressBar';
 import { hookSeconds, works } from './content.js';
 import { siteUrl } from './links.jsx';
-import { placeholderArt } from './placeholders.js';
 
 // 이미지가 바뀐 직후에 누르면 사용자가 보고 있던 직전 이미지로 처리합니다.
 const CUT_GRACE = 0.25;
@@ -54,11 +53,11 @@ export function HookBar({ clock }) {
   );
 }
 
-// 이미지가 없으면 임시 그림을 보여 줍니다.
+// 이미지가 없으면 빈 틀만 둡니다.
 export function Still({ work, src = work.poster, eager = false, alt = '' }) {
   const url = siteUrl(src);
   if (url) return <img className="art" src={url} alt={alt} loading={eager ? 'eager' : 'lazy'} />;
-  return <span className={`art art-${work.id}`} aria-hidden="true" dangerouslySetInnerHTML={{ __html: placeholderArt[work.id] }} />;
+  return <span className="art" aria-hidden="true" />;
 }
 
 // 같은 이동을 왼쪽 목록이 맡으므로 보조 기술과 키보드에서는 건너뜁니다.

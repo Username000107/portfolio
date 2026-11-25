@@ -25,5 +25,15 @@
     <div id="root"></div>
     <noscript><p style="margin: 0; padding: 24px; color: #ECE7DF; font-family: sans-serif">레벨 디자이너 박세준의 포트폴리오입니다. 영상과 작업 내용을 보려면 JavaScript를 켜 주세요.</p></noscript>
     <script type="module" src="/src/home.jsx"></script>
+    <script>
+      // 실제 사이트 주소에서만 켭니다. 로컬에서는 동작하지 않습니다.
+      if (location.hostname === 'username000107.github.io') {
+        var s = document.createElement('script');
+        s.type = 'module';
+        s.src = 'https://static.cloudflareinsights.com/beacon.min.js';
+        s.setAttribute('data-cf-beacon', '{"token": "169ad0f022cf4e44bf1929a2dcd7c419"}');
+        document.head.appendChild(s);
+      }
+    </script>
   </body>
 </html>
