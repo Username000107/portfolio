@@ -15,7 +15,7 @@ export const profile = {
 };
 
 // 홈에서 훅 이미지 한 장이 보이는 시간(초)입니다.
-export const hookSeconds = 6;
+export const hookSeconds = 4.5;
 
 export const works = [
   {
